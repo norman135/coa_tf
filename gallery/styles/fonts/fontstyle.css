@@ -1,0 +1,10 @@
+
+@font-face {
+    font-family: 'DIN Condensed';
+    src: url('DINCondensed-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Light.ttf') format('truetype');
+}
