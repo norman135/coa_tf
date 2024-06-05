@@ -1,53 +1,79 @@
-let imageContainers = document.querySelectorAll(".image-container")
-let blurCover = document.querySelector(".blur-cover")
+document.addEventListener("DOMContentLoaded", () => {
+    // Select all image containers and the blur cover element
+    const imageContainers = document.querySelectorAll(".image-container");
+    const blurCover = document.querySelector(".blur-cover");
 
-imageContainers.forEach(container => {
-    let image = container.querySelector(".image")
-    let imageLink = container.querySelector(".image-info-link")
-    let imageLocation = container.querySelector(".image-info-location")
-    let containerClone = container.cloneNode(true)
-    containerClone.className = ".image-container .imcd"
+    // Iterate over each image container to add event listeners
+    imageContainers.forEach(container => {
+        const image = container.querySelector(".image");
+        const imageLink = container.querySelector(".image-info-link");
+        const imageLocation = container.querySelector(".image-info-location");
+        const containerClone = container.cloneNode(true);
+        containerClone.className = "image-container imcd";
 
-    container.addEventListener("mouseover", ()=>{
-        image.style.filter = "blur(5px) grayscale(1) brightness(0.5)"
-        image.style.transform = "scale(1.1)"
-        imageLink.style.opacity = 1
-        imageLocation.style.marginBottom = "30px"
-    })
-    container.addEventListener("mouseleave", ()=>{
-        image.style.filter = "unset"
-        image.style.transform = "unset"
-        imageLink.style.opacity = 0
-        imageLocation.style.marginBottom = "unset"
-    })
+        // Mouseover event to apply image styles and show link and location
+        container.addEventListener("mouseover", () => {
+            applyImageStyles(image, {
+                filter: "blur(5px) grayscale(1) brightness(0.5)",
+                transform: "scale(1.1)"
+            });
+            imageLink.style.opacity = "1";
+            imageLocation.style.marginBottom = "30px";
+        });
 
-    container.addEventListener("click", ()=>{
-        containerClone.className = "image-container imcd"
-        blurCover.appendChild(containerClone)
-        blurCover.style.display = "block"
-        setTimeout(() => {
-            blurCover.style.backdropFilter = "blur(5px)"
-            containerClone.className = "image-container imcd imcd-active"
-        }, 1)
-    })
+        // Mouseleave event to reset image styles and hide link and location
+        container.addEventListener("mouseleave", () => {
+            applyImageStyles(image, {
+                filter: "unset",
+                transform: "unset"
+            });
+            imageLink.style.opacity = "0";
+            imageLocation.style.marginBottom = "unset";
+        });
 
-    imageLink.addEventListener("click", (e)=>{
-        e.stopPropagation();
-    })
-})
+        // Click event to show the image in the blur cover
+        container.addEventListener("click", () => {
+            showImageInBlurCover(containerClone);
+        });
 
+        // Prevent link click from propagating to the container click event
+        imageLink.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+    });
 
-blurCover.addEventListener("click", (e)=>{
-    let containerClone = blurCover.querySelector(".imcd")
+    // Click event to hide the blur cover when clicking outside the cloned image
+    blurCover.addEventListener("click", (e) => {
+        if (e.target !== blurCover) return;
+        hideBlurCover();
+    });
 
-    if (e.target != blurCover) {
-        return null
+    // Function to apply styles to the image element
+    function applyImageStyles(image, styles) {
+        for (const [key, value] of Object.entries(styles)) {
+            image.style[key] = value;
+        }
     }
 
-    blurCover.style.backdropFilter = "blur(0px)"
-    containerClone.className = ".image-container .imcd"
-    setTimeout(() => {
-        blurCover.innerHTML = ""
-        blurCover.style.display = "none"
-    }, 300)
-})
+    // Function to show the cloned image in the blur cover
+    function showImageInBlurCover(containerClone) {
+        containerClone.className = "image-container imcd";  // Reset class name
+        blurCover.appendChild(containerClone);
+        blurCover.style.display = "block";
+        setTimeout(() => {
+            blurCover.style.backdropFilter = "blur(5px)";
+            containerClone.classList.add("imcd-active");
+        }, 1);
+    }
+
+    // Function to hide the blur cover and remove the cloned image
+    function hideBlurCover() {
+        const containerClone = blurCover.querySelector(".imcd");
+        blurCover.style.backdropFilter = "blur(0px)";
+        containerClone.className = "image-container imcd";  // Reset class name
+        setTimeout(() => {
+            blurCover.innerHTML = "";
+            blurCover.style.display = "none";
+        }, 300);
+    }
+});

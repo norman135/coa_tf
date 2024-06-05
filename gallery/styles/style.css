@@ -1,22 +1,29 @@
+/* General Reset and Transitions */
 * {
     padding: 0;
     margin: 0;
     transition: all 300ms;
 }
+
+/* Image Row Container */
 .images-row {
     position: relative;
     display: flex;
     flex-direction: row;
     height: 100vh;
 }
+
+/* Image Container */
 .image-container {
     position: relative;
     flex: 1;
     overflow: hidden;
-    border-left: solid 1px black;
-    border-right: solid 1px black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
     cursor: pointer;
 }
+
+/* Cloned Image Container */
 .imcd {
     position: absolute;
     z-index: 10;
@@ -28,27 +35,36 @@
     opacity: 0;
     cursor: default;
 }
+
 .imcd-active {
     opacity: 1;
 }
+
 .imcd .image-info-link {
     opacity: 1;
 }
+
 .imcd .image-info-location {
     margin-bottom: 30px;
 }
+
+/* Image Styles */
 .image {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
+/* Image Overlay */
 .image-overall-cover {
     position: absolute;
     height: 100%;
     width: 100%;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.7));
 }
+
+/* Image Info Container */
 .image-info {
     z-index: 2;
     color: white;
@@ -57,6 +73,8 @@
     transform: translateY(-100%);
     padding: 25px 40px;
 }
+
+/* Image Info Title */
 .image-info-title {
     font-size: 38px;
     line-height: 38px;
@@ -66,10 +84,14 @@
     vertical-align: top;
     margin-bottom: 10px;
 }
+
+/* Image Info Location */
 .image-info-location {
     font-family: 'Poppins', Arial, sans-serif;
     font-size: 12px;
 }
+
+/* Image Info Link */
 .image-info-link {
     text-decoration: none;
     position: relative;
@@ -79,9 +101,13 @@
     top: -20px;
     opacity: 0;
 }
+
+/* Info Link Icon */
 .info-link-icon {
     transform: translate(2px, 4px);
 }
+
+/* Blur Cover */
 .blur-cover {
     position: absolute;
     height: 100%;
@@ -90,24 +116,30 @@
     z-index: 3;
 }
 
+/* Responsive Styles */
 @media screen and (max-width: 750px) {
     .image-info {
         padding: 10px 10px;
     }
+
     .image-info-title {
         font-size: 30px;
     }
+
     .imcd {
         width: 50%;
     }
 }
+
 @media screen and (max-width: 500px) {
     .image-info {
         display: none;
     }
+
     .imcd {
         width: 75%;
     }
+
     .imcd .image-info {
         display: block;
     }
