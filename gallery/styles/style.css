@@ -13,6 +13,8 @@
     position: relative;
     flex: 1;
     overflow: hidden;
+    border-left: solid 1px black;
+    border-right: solid 1px black;
 }
 .image {
     position: absolute;
@@ -32,7 +34,7 @@
     position: absolute;
     top: 100%;
     transform: translateY(-100%);
-    padding: 25px 42px;
+    padding: 25px 40px;
 }
 .image-info-title {
     font-size: 38px;
@@ -58,4 +60,18 @@
 }
 .info-link-icon {
     transform: translate(2px, 4px);
+}
+
+@media screen and (max-width: 750px) {
+    .image-info {
+        padding: 10px 10px;
+    }
+    .image-info-title {
+        font-size: 30px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .image-info {
+        display: none;
+    }
 }
