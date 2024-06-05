@@ -15,8 +15,10 @@ function transformString(string) {
     }
 
     // If divisible by 3, reverse string
-    // Spaces are removed to achieve same output as example: Chocolate Chip Cookie => eikooCpihCetalocohC
-    // Instead of: Chocolate Chip Cookie => eikooC pihC etalocohC
+
+    /* Spaces are removed to achieve same output as example: Chocolate Chip Cookie => eikooCpihCetalocohC
+    Instead of: Chocolate Chip Cookie => eikooC pihC etalocohC */
+    
     if (string.length % 3 === 0) {
         return string.split('').reverse().join('').replaceAll(' ', '');
     }
